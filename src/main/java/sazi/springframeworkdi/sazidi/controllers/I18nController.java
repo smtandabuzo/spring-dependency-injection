@@ -1,18 +1,18 @@
 package sazi.springframeworkdi.sazidi.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import sazi.springframeworkdi.sazidi.services.GreetingService;
 
 @Controller
-public class PropertyInjectedController {
+public class I18nController {
+    private final GreetingService greetingService;
 
-    @Qualifier("propertyInjectedGreetingService")
-    @Autowired
-    GreetingService greetingService;
+    public I18nController(@Qualifier("i18nService") GreetingService greetingService) {
+        this.greetingService = greetingService;
+    }
 
-    public String getGreeting(){
+    public String sayHello(){
         return greetingService.sayGreeting();
     }
 }
